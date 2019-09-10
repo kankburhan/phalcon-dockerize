@@ -1,4 +1,4 @@
-version: "2"
+version: "3.3"
 services:
 
   nginx:
@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - /www/web:/usr/share/nginx/html
+      - ./app:/usr/share/nginx/html
     ports:
       - "80:80"
     links:
@@ -21,7 +21,7 @@ services:
       - mysql
       - redis
     volumes:
-      - /www/web:/usr/share/nginx/html
+      - ./app:/usr/share/nginx/html
 
   mysql:
     image: mysql
@@ -29,7 +29,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /data/mysql:/var/lib/mysql
+      - "$PWD/mysql/my.cnf:/etc/mysql/conf.d/mysql.cnf"
     environment:
       MYSQL_ROOT_PASSWORD: root
  
