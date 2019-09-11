@@ -26,12 +26,14 @@ RUN curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${DEVTOOLS_VER
     && ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon \
     && rm -f v${DEVTOOLS_VERSION}.tar.gz
 
+# Install git
+RUN apt-get update \
+&& apt-get -y install php7.2-gmp \
+&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
 # composer
 ENV COMPOSER_VERSION=1.8.3
 RUN curl -L https://getcomposer.org/installer -o composer-setup.php \
     && php composer-setup.php --version=${COMPOSER_VERSION} --install-dir=/usr/local/bin --filename=composer \
     && rm -f composer-setup.php
 
-
-# Install Dependency
-RUN apt install php7.2-gmp 
