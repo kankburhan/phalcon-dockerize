@@ -12,6 +12,7 @@ RUN apt-get update \
 # Install phalcon
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | bash \
 && apt-get install -y php7.2-phalcon=3.4.2-2+php7.2 \
+&& apt-get -y install php7.2-gmp \
 && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Install git
@@ -25,11 +26,6 @@ RUN curl -LO https://github.com/phalcon/phalcon-devtools/archive/v${DEVTOOLS_VER
     && mv phalcon-devtools-${DEVTOOLS_VERSION} /usr/local/phalcon-devtools \
     && ln -s /usr/local/phalcon-devtools/phalcon.php /usr/local/bin/phalcon \
     && rm -f v${DEVTOOLS_VERSION}.tar.gz
-
-# Install git
-RUN apt-get update \
-&& apt-get -y install php7.2-gmp \
-&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # composer
 ENV COMPOSER_VERSION=1.8.3
