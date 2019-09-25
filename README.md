@@ -26,3 +26,18 @@ echo "Errno: " . $mysql->connect_errno . "\n";
 $result = $mysql -> query("show databases");
 print_r($result);
 ```
+
+
+### Add User Mysql 
+Tambahkan Grant Access ke mysql
+
+```
+CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+CREATE USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+#
+CREATE DATABASE IF NOT EXISTS `kd-chat` COLLATE 'utf8_general_ci' ;
+GRANT ALL ON `kd-chat`.* TO 'admin'@'%' ;
+FLUSH PRIVILEGES ;
+```
