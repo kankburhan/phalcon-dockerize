@@ -1,6 +1,6 @@
 # docker-compose-php-nginx-mysql-redis
 ## How to use
-> docker-compose up
+> docker-compose up --build
 
 ## In PHP File
 
